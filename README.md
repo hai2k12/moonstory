@@ -15,7 +15,7 @@ Từ Thanh Vân Thành nhỏ bé cho đến Tiên Giới vô tận, Diệp Thầ
 
 * Tên truyện: Nghịch Thiên Kiếm Tôn
 * Thể loại: Tiên Hiệp, Huyền Huyễn, Tu Tiên, Hệ Thống Cảnh Giới
-* Tác giả: Moon212
+* Tác giả: Đào Thiên Hải
 * Trạng thái: Đang phát triển
 * Số chương hiện tại: 10 chương
 * Tổng số phần: 100 phần
