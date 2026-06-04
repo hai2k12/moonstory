@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nghịch Thiên Kiếm Tôn - Website Đọc Truyện</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body class="theme-dark">
+  <div class="app-shell">
+    <!-- HEADER -->
+    <header class="app-header">
+      <div class="brand-bar">
+        <div class="brand-mark">NT</div>
+        <div>
+          <h1>Nghịch Thiên Kiếm Tôn</h1>
+          <p>Website đọc truyện Tiên hiệp chất lượng cao</p>
+        </div>
+      </div>
+      <nav class="app-nav" aria-label="Điều hướng chính">
+        <button data-route="home" class="nav-link active">🏠 Trang chủ</button>
+        <button data-route="chapters" class="nav-link">📖 Chương</button>
+        <button data-route="characters" class="nav-link">⚔️ Nhân vật</button>
+        <button data-route="statistics" class="nav-link">📊 Thống kê</button>
+        <button data-route="profile" class="nav-link">👤 Hồ sơ</button>
+      </nav>
+      <div class="header-actions">
+        <button id="themeToggle" class="icon-button" aria-label="Chuyển chế độ">☀️</button>
+        <div id="userInfo"></div>
+      </div>
+    </header>
+
+    <!-- SIDEBAR: DANH SÁCH CHƯƠNG -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <h3>Mục lục chương</h3>
+      </div>
+      <div id="chapterSidebar" class="sidebar-content"></div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="app-main">
+
+      <!-- PAGE: HOME -->
+      <section id="homePage" class="page active" aria-label="Trang chủ">
+        <div class="hero-card">
+          <div>
+            <span class="eyebrow">Tiểu thuyết Tiên hiệp</span>
+            <h2>Nghịch Thiên Kiếm Tôn</h2>
+            <p>Từ một thiếu chủ bị phế bỏ, Diệp Thần từng bước nghịch thiên cải mệnh, chém phá thiên đạo, trở thành Nghịch Thiên Kiếm Tôn.</p>
+            <div class="hero-actions">
+              <button id="startReadingBtn" class="primary-button">Bắt đầu đọc</button>
+              <button id="openChaptersBtn" class="secondary-button">Danh sách chương</button>
+            </div>
+          </div>
+          <div class="hero-card-meta">
+            <div class="stat-card">
+              <span>Tổng số chương</span>
+              <strong id="totalChapters">10</strong>
+            </div>
+            <div class="stat-card">
+              <span>Trạng thái</span>
+              <strong>Hoàn thành</strong>
+            </div>
+            <div class="stat-card">
+              <span>Đã đọc</span>
+              <strong id="readCount">0</strong>
+            </div>
+            <div class="stat-card">
+              <span>Hoàn thành</span>
+              <strong id="completionPercent">0%</strong>
+            </div>
+          </div>
+        </div>
+
+        <div id="continueReading" class="section-block"></div>
+
+        <div class="grid-panel">
+          <div class="info-card">
+            <div class="card-header">
+              <h3>Về bộ truyện</h3>
+              <span>Hành trình vượt qua định mệnh</span>
+            </div>
+            <p>Diệp Thần bị phế linh căn từ nhỏ, bị gia tộc ruồng rẫy. Nhưng thứ không ai lường trước là cơ duyên từ cửu ngạc cổ đã thay đổi vận mệnh hắn.</p>
+            <div class="card-grid">
+              <div><strong>Thể loại</strong><span>Kiếm hiệp, Tiên hiệp, Huyền ảo</span></div>
+              <div><strong>Nhân vật chính</strong><span>Diệp Thần, Tuyết Nhi</span></div>
+              <div><strong>Tổng chương</strong><span id="storyChapters">10 chương</span></div>
+              <div><strong>Ngôn ngữ</strong><span>Tiếng Việt</span></div>
+            </div>
+          </div>
+
+          <div class="progress-card">
+            <div class="card-header">
+              <h3>Tiến độ đọc của bạn</h3>
+              <span>Theo dõi tiến triển</span>
+            </div>
+            <div class="progress-stack">
+              <div class="progress-row"><span>Chương đã đọc</span><strong id="progressCount">0 / 10</strong></div>
+              <div class="progress-bar"><div id="progressFill"></div></div>
+              <div class="progress-row"><span>Hoàn thành</span><strong id="progressLabel">0%</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-heading">
+            <div>
+              <h3>Chương mới nhất</h3>
+              <p>Những chương được cập nhật gần đây</p>
+            </div>
+          </div>
+          <div id="latestChapters" class="chapter-grid"></div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-heading">
+            <div>
+              <h3>Nhân vật nổi bật</h3>
+              <p>Những nhân vật chính của câu chuyện</p>
+            </div>
+          </div>
+          <div id="featuredCharacters" class="character-grid"></div>
+        </div>
+      </section>
+
+      <!-- PAGE: CHAPTERS -->
+      <section id="chaptersPage" class="page" aria-label="Danh sách chương">
+        <div class="section-heading">
+          <div>
+            <h2>Danh sách chương</h2>
+            <p>Tìm kiếm, lọc và chuyển nhanh đến chương bạn muốn đọc</p>
+          </div>
+        </div>
+
+        <div class="search-panel">
+          <div class="search-field">
+            <label for="chapterSearch">Tìm kiếm chương</label>
+            <input id="chapterSearch" type="search" placeholder="Số chương, tiêu đề hoặc nội dung...">
+          </div>
+          <div class="filter-buttons" role="group" aria-label="Bộ lọc chương">
+            <button data-filter="all" class="filter-button active">Tất cả</button>
+            <button data-filter="read" class="filter-button">Đã đọc</button>
+            <button data-filter="unread" class="filter-button">Chưa đọc</button>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="progress-row">
+            <span id="chapterListCount">10 chương</span>
+            <span id="chapterListStatus">Đã đọc 0 chương</span>
+          </div>
+        </div>
+
+        <div id="chapterList" class="chapter-list"></div>
+      </section>
+
+      <!-- PAGE: READER -->
+      <section id="readerPage" class="page" aria-label="Đọc chương">
+        <div class="reader-toolbar">
+          <div>
+            <span class="eyebrow" id="readerMeta">Chương</span>
+            <h2 id="readerTitle">Chương 1</h2>
+          </div>
+          <div class="reader-actions">
+            <button id="prevChapterBtn" class="secondary-button">← Chương trước</button>
+            <button id="nextChapterBtn" class="secondary-button">Chương sau →</button>
+          </div>
+        </div>
+
+        <div class="reader-settings">
+          <div class="range-field">
+            <label for="fontSizeRange">Cỡ chữ</label>
+            <input id="fontSizeRange" type="range" min="14" max="26" value="18">
+          </div>
+          <div class="range-field">
+            <label for="widthRange">Chiều rộng</label>
+            <input id="widthRange" type="range" min="600" max="1200" value="840">
+          </div>
+          <button id="fullscreenBtn" class="icon-button" title="Toàn màn hình">⛶</button>
+        </div>
+
+        <article id="readerContent" class="reader-content"></article>
+
+        <div class="reader-toolbar" style="margin-top: 3rem;">
+          <button id="backToChaptersBtn" class="secondary-button" onclick="ROUTER.go('#chapters')">← Quay lại danh sách</button>
+        </div>
+      </section>
+
+      <!-- PAGE: CHARACTERS -->
+      <section id="charactersPage" class="page" aria-label="Nhân vật">
+        <div class="section-heading">
+          <div>
+            <h2>Nhân vật</h2>
+            <p>Danh sách nhân vật theo nhóm và thông tin chi tiết</p>
+          </div>
+        </div>
+
+        <div class="search-panel">
+          <div class="search-field">
+            <label for="characterSearch">Tìm nhân vật</label>
+            <input id="characterSearch" type="search" placeholder="Nhập tên hoặc vai trò...">
+          </div>
+          <div class="filter-buttons" role="group" aria-label="Bộ lọc nhân vật">
+            <button data-filter="all" class="filter-button active">Tất cả</button>
+            <button data-filter="Nhân vật chính" class="filter-button">Nhân vật chính</button>
+            <button data-filter="Đồng hành" class="filter-button">Đồng hành</button>
+            <button data-filter="Phản diện" class="filter-button">Phản diện</button>
+            <button data-filter="Nhân vật phụ" class="filter-button">Nhân vật phụ</button>
+          </div>
+        </div>
+
+        <div id="characterList" class="section-block"></div>
+      </section>
+
+      <!-- PAGE: CHARACTER DETAIL -->
+      <section id="character-detailPage" class="page" aria-label="Chi tiết nhân vật">
+        <div class="section-heading">
+          <div>
+            <h2 id="characterDetailName">Nhân vật</h2>
+            <p id="characterDetailGroup">Nhóm nhân vật</p>
+          </div>
+          <button id="backToCharactersBtn" class="secondary-button">← Quay lại</button>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-meta">
+            <div>
+              <strong>Danh hiệu</strong>
+              <p id="characterTitles"></p>
+            </div>
+            <div>
+              <strong>Thân thế</strong>
+              <p id="characterIdentity"></p>
+            </div>
+            <div>
+              <strong>Tính cách</strong>
+              <p id="characterPersonality"></p>
+            </div>
+            <div>
+              <strong>Vai trò</strong>
+              <p id="characterRole"></p>
+            </div>
+            <div>
+              <strong>Công pháp / Vũ khí</strong>
+              <p id="characterSkill"></p>
+            </div>
+            <div>
+              <strong>Xuất hiện</strong>
+              <p id="characterAppearances"></p>
+            </div>
+          </div>
+
+          <div class="related-chapters-card">
+            <h3>Chương liên quan</h3>
+            <div id="relatedChapters" class="chip-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: PROFILE -->
+      <section id="profilePage" class="page" aria-label="Hồ sơ cá nhân">
+        <h2>Hồ sơ cá nhân</h2>
+
+        <div class="profile-grid">
+          <div class="profile-avatar" style="text-align: center;">
+            <div id="profileAvatar" style="font-size: 4rem; margin-bottom: 1rem;">⚔️</div>
+            <h3 id="profileUsername">User</h3>
+          </div>
+          <div class="profile-info">
+            <div id="profileStats" class="progress-stack"></div>
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <h3>Thông tin cá nhân</h3>
+          <div style="display: grid; gap: 1rem;">
+            <div>
+              <label for="profileEmail">Email</label>
+              <input id="profileEmail" type="email" readonly>
+            </div>
+            <div>
+              <label for="profileDisplayName">Tên hiển thị</label>
+              <input id="profileDisplayName" type="text" placeholder="Nhập tên hiển thị...">
+            </div>
+            <div>
+              <label for="profileBio">Tiểu sử</label>
+              <textarea id="profileBio" rows="4" placeholder="Viết về bản thân..."></textarea>
+            </div>
+            <button id="updateProfileBtn" class="primary-button">Lưu thông tin</button>
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <h3>Đổi mật khẩu</h3>
+          <div style="display: grid; gap: 1rem;">
+            <div>
+              <label for="currentPassword">Mật khẩu hiện tại</label>
+              <input id="currentPassword" type="password" placeholder="Nhập mật khẩu...">
+            </div>
+            <div>
+              <label for="newPassword">Mật khẩu mới</label>
+              <input id="newPassword" type="password" placeholder="Nhập mật khẩu mới...">
+            </div>
+            <div>
+              <label for="confirmPassword">Xác nhận mật khẩu</label>
+              <input id="confirmPassword" type="password" placeholder="Xác nhận mật khẩu...">
+            </div>
+            <button id="changePasswordBtn" class="primary-button">Đổi mật khẩu</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: STATISTICS -->
+      <section id="statisticsPage" class="page" aria-label="Thống kê">
+        <h2>Thống kê đọc truyện</h2>
+
+        <div class="grid-panel">
+          <div id="statsOverview" class="stats-overview"></div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-heading">
+            <h3>Chương yêu thích</h3>
+          </div>
+          <div id="favoriteChapters" class="chapter-list"></div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-heading">
+            <h3>Chương gần đây đã đọc</h3>
+          </div>
+          <div id="recentChapters" class="chapter-list"></div>
+        </div>
+      </section>
+
+      <!-- PAGE: AUTH -->
+      <section id="authPage" class="page" aria-label="Xác thực">
+        <div id="authForm"></div>
+      </section>
+
+    </main>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast"></div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="data.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/router.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
